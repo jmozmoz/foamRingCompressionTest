@@ -1,0 +1,122 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | foam-extend: Open Source CFD                    |
+|  \\    /   O peration     | Version:     3.1                                |
+|   \\  /    A nd           | Web:         http://www.extend-project.de       |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       volVectorField;
+    location    "0";
+    object      DU;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+dimensions      [0 1 0 0 0 0 0];
+
+internalField   uniform (0 0 0);
+
+boundaryField
+{
+    left
+    {
+      type            symmetryPlane;
+    }
+
+    ring
+    {
+      type                 solidContact;
+      shadowPatch          blockLeft;
+      master               no;
+      contactActive        yes;
+      value                uniform (0 0 0);
+    }
+
+    down
+    {
+      type            symmetryPlane;
+    }
+
+//    up
+//    {
+//      type            solidTractionFree;
+//      nonLinear       updatedLagrangian;
+//    }
+
+    hole
+    {
+      type            solidTractionFree;
+      nonLinear       updatedLagrangian;
+    }
+
+    frontAndBack
+    {
+        type          empty;
+    }
+
+    blockFrontAndBack
+    {
+        type          empty;
+    }
+
+    blockDown
+    {
+        type          symmetryPlane;
+    }
+
+    blockUp
+    {
+        type          solidTractionFree;
+        nonLinear     updatedLagrangian;
+    }
+
+    blockRight
+    {
+         type            timeVaryingSolidTraction;
+         nonLinear       updatedLagrangian;
+         outOfBounds     clamp;
+         fileName        "$FOAM_CASE/constant/timeVsRightTraction";
+    }
+
+    blockLeft
+    {
+      type                 solidContact;
+      master               yes;
+      contactActive        yes;
+      rigidMaster          no;
+      shadowPatch          ring;
+      interpolationMethod  ggi;
+      //interpolationMethod  patchToPatch;
+      projectionAlgo       visible;
+      projectionDir        contactSphere;
+      //projectionDir        vector;
+      correctionFrequency   10;
+      normalContactModel     standardPenalty;
+      standardPenaltyNormalModelDict
+        {
+          relaxationFactor               0.1;
+          penaltyScale                   1;
+          returnScale                    1.5;
+          contactGapTol                  1e-7;
+          limitPenetration               no;
+          penetrationLimit               -0.03;
+          limitPressure                  no;
+          pressureLimit                  1e12;
+          correctMissedVertices          yes;
+          distanceMethod                 point;
+          //distanceMethod                 face;
+          oscillationCorrection          yes;
+          smoothingSteps                 1;
+          infoFrequency                  10;
+          }
+      frictionContactModel   frictionless;
+      value                uniform (0 0 0);
+    }
+
+
+}
+
+// ************************************************************************* //
