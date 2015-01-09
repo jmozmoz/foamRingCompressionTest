@@ -1,0 +1,5 @@
+faceSet rightFaceZone new patchToFace right
+faceSet blockLeftFaceZone new patchToFace blockLeft
+pointSet rightPointZone new faceToPoint rightFaceZone all
+pointSet blockLeftPointZone new faceToPoint blockLeftFaceZone all
+
