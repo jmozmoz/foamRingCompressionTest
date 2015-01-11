@@ -29,6 +29,7 @@ gradSchemes
 {
     default           none;
     grad(DU)          extendedLeastSquares 0;
+    grad(DU_0)        extendedLeastSquares 0;
     snGradCorr(DU)    extendedLeastSquares 0;
 }
 

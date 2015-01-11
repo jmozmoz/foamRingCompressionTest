@@ -28,7 +28,7 @@ solvers
 
 solidMechanics
 {
-    nCorrectors           10000;
+    nCorrectors           1000;
     DU                     1e-07;
     //divSigmaExp           standard;
     divSigmaExp           surface;
