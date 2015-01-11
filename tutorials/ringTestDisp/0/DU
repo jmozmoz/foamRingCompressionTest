@@ -34,7 +34,6 @@ boundaryField
       contactActive        yes;
       value                uniform (0 0 0);
     }
-
     down
     {
       type            symmetryPlane;
@@ -93,7 +92,7 @@ boundaryField
       projectionAlgo       visible;
       projectionDir        contactSphere;
       //projectionDir        vector;
-      correctionFrequency   10;
+      correctionFrequency   1;
       normalContactModel     standardPenalty;
       standardPenaltyNormalModelDict
         {
@@ -113,6 +112,22 @@ boundaryField
           infoFrequency                  10;
           }
       frictionContactModel   frictionless;
+      //frictionContactModel   standardPenalty;
+      standardPenaltyFrictionModelDict
+    {
+      relaxationFactor               0.1;
+      penaltyScale                   1;
+      oscillationCorrection          yes;
+      smoothingSteps                 1;
+      infoFrequency                  10;
+    
+      frictionLaw       coulomb;
+      frictionLawDict
+        {
+          frictionCoeff     0.1;
+        }
+    }
+
       value                uniform (0 0 0);
     }
 

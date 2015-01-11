@@ -28,7 +28,7 @@ solvers
 
 solidMechanics
 {
-    nCorrectors           2000;
+    nCorrectors           10000;
     DU                     1e-07;
     //divSigmaExp           standard;
     divSigmaExp           surface;
@@ -46,6 +46,6 @@ solidMechanics
 
 relaxationFactors
 {
-  DU   0.5;
+//  DU   0.8;
 }
 // ************************************************************************* //
