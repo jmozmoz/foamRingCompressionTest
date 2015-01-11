@@ -45,4 +45,30 @@ timePrecision   6;
 
 runTimeModifiable yes;
 
+functions 
+(
+   force
+   {
+       type patchIntegrate;
+       functionObjectLibs
+         (
+           "libsimpleFunctionObjects.so"
+         );
+       verbose true;
+       patches
+         (
+           left
+           blockLeft
+	   blockRight
+         );
+       factor 10.0;
+       fields
+         (
+           sigma
+         );
+       outputControl timeStep;
+       outputInterval 1;
+   }
+);
+
 // ************************************************************************* //

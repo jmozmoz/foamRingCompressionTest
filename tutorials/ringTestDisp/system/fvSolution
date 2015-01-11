@@ -22,13 +22,13 @@ solvers
         solver          PCG;
         preconditioner  DIC;
         tolerance       1e-08;
-        relTol          0.1;
+        relTol          0.05;
     }
 }
 
 solidMechanics
 {
-    nCorrectors           1000;
+    nCorrectors           2000;
     DU                     1e-07;
     //divSigmaExp           standard;
     divSigmaExp           surface;
